@@ -1,0 +1,45 @@
+<p>home works!</p>
+<section class="home">
+  <div id="content">
+    <div *ngIf="state === 'default'">
+      <button  (click)="goToCreateElection()">Criar eleição</button>
+      <br>
+      <br>
+      <span>codigo da eleição </span>
+      <input placeholder="ex:12" type="text" name="codeVotation" id="codeVotation" [(ngModel)]="codeVotation">
+      <button (click) = 'getCandidates()'>buscar</button>
+
+      <br>
+      <span>lasted elections created</span>
+      <ul>
+        <li>
+          eleição 1
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="state === 'createElection'">
+        <h2>Create Election</h2>
+        <form (ngSubmit)="createElection()">
+          <div>
+            <label for="electionName">Election Name:</label>
+            <input id="electionName" [(ngModel)]="electionName" name="electionName" required>
+          </div>
+          <div>
+            <label for="proposalNames">Proposal Names (comma-separated):</label>
+            <input id="proposalNames" [(ngModel)]="proposalNamesInput" name="proposalNames" required>
+          </div>
+          <div>
+            <label for="durationMinutes">Duration (minutes):</label>
+            <input id="durationMinutes" type="number" [(ngModel)]="durationMinutes" name="durationMinutes" required>
+          </div>
+          <button type="submit">Create Election</button>
+        </form>
+    </div>
+
+    <div *ngIf="state === 'votation' && codeVotation">
+      <div *ngFor="let candidate of candidates">
+        {{ candidate }}
+      </div>
+    </div>
+  </div>
+</section>
